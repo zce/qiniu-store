@@ -22,6 +22,8 @@ const config = {
   format: 'test/' + timestamp + '/${yyyy}/${mm}/${name}${ext}'
 }
 
+const delay = timeout => new Promise(resolve => setTimeout(resolve, timeout))
+
 test.before(t => {
   const storage = new QiniuStorage(config)
   const file = {
@@ -31,10 +33,11 @@ test.before(t => {
   return storage.save(file)
     .then(uri => {
       t.context.faker = uri
+      return delay(15000)
     })
 })
 
-test('constructor', t => {
+test('constructor#case1', t => {
   const storage = new QiniuStorage(config)
   t.truthy(storage.token)
   t.truthy(storage.uploader)
@@ -44,6 +47,11 @@ test('constructor', t => {
   t.is(storage.nameFormat, '${name}${ext}')
   t.is(storage.bucket, process.env.QINIU_BUCKET)
   t.is(storage.domain, process.env.QINIU_DOMAIN)
+})
+
+test('constructor#case2', t => {
+  const err = t.throws(() => new QiniuStorage({}))
+  t.is(err.message, 'Missing necessary configuration options')
 })
 
 test('getDirectory', t => {
