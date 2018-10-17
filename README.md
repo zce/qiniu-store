@@ -13,41 +13,196 @@
 
 ## Installation
 
-```shell
-$ yarn add qiniu-store
+### Via Yarn or NPM
 
-# or npm
-$ npm install qiniu-store
-```
+- Install qiniu-store module
+
+  ```shell
+  $ yarn add qiniu-store
+  # or npm
+  $ npm install qiniu-store
+  ```
+
+- Make the storage folder if it doesn't exist yet
+
+  ```shell
+  $ mkdir -p content/adapters/storage
+  ```
+
+- Copy the module into the right location
+
+  ```shell
+  $ cp -vR node_modules/qiniu-store content/adapters/storage/qiniu
+  ```
+
+### Via Git
+
+In order to replace the storage module, the basic requirements are:
+
+- Create a new folder inside `content/adapters` called `storage`
+
+  ```shell
+  $ mkdir -p content/adapters/storage
+  ```
+
+- Clone this repo to `storage`
+
+  ```shell
+  $ cd [path/to/ghost]/content/adapters/storage
+  $ git clone https://github.com/zce/qiniu-store.git qiniu --depth 1
+  ```
+
+- Install dependencies
+
+  ```shell
+  $ cd qiniu
+  $ yarn # or npm install
+  ```
 
 ## Usage
 
-<!-- TODO: Introduction of API use -->
+### Ghost Adapter
+
+In your `config.[env].json` file, you'll need to add a new `storage` block to whichever environment you want to change:
+
+```json
+{
+  "storage": {
+    "active": "qiniu",
+    "qiniu": {
+      "accessKey": "your access key",
+      "secretKey": "your secret key",
+      "bucket": "your bucket name",
+      "domain": "your bucket domain",
+      "format": "${yyyy}/${mm}/${name}${ext}"
+    }
+  }
+}
+```
+
+#### Available format tags
+
+- `${yyyy}`: year
+- `${mm}`: month
+- `${dd}`: dates
+- `${uuid}`: uuid
+- `${timestamp}`: timestamp
+- `${random}`: 8 digit random
+- `${name}`: original file name
+- `${ext}`: original file ext
+
+##### Example format
+
+`"${yyyy}/${mm}/${dd}/${name}-${uuid}-${timestamp}-${random}${ext}"`
+
+### Programatically
 
 ```javascript
-const qiniuStore = require('qiniu-store')
-const result = qiniuStore('zce')
-// result => 'zce@zce.me'
+const QiniuStore = require('qiniu-store')
+const store = QiniuStore({
+  accessKey: 'your access key',
+  secretKey: 'your secret key',
+  bucket: 'your bucket name',
+  domain: 'your bucket domain',
+  format: '${yyyy}/${mm}/${name}${ext}'
+})
+
+// save file
+const file = { name: 'wow.png', path: '/Users/zce/Pictures/mono.png' }
+store.save(file, '2018/10')
+
+// read file
+store.read({ path: '2018/10/wow.png' })
+
+// exists file
+store.exists('wow.png', '2018/10')
 ```
 
 ## API
 
-<!-- TODO: Introduction of API -->
+### QiniuStore(options)
 
-### qiniuStore(name[, options])
-
-#### name
-
-- Type: `string`
-- Details: name string
+QiniuStore constructor
 
 #### options
 
-##### host
+##### accessKey
 
 - Type: `string`
-- Details: host string
-- Default: `'zce.me'`
+- Details: qiniu access key.
+
+##### secretKey
+
+- Type: `string`
+- Details: qiniu secret key.
+
+##### bucket
+
+- Type: `string`
+- Details: qiniu bucket name.
+
+##### domain
+
+- Type: `string`
+- Details: qiniu bucket domain.
+
+### QiniuStore.prototype.save(file[, targetDir])
+
+Save file to Qiniu storage, Returns a Promise for file url String.
+
+#### file
+
+##### name
+
+- Type: `string`
+- Details: the name of the file to upload.
+
+##### path
+
+- Type: `string`
+- Details: the path of the file to upload.
+
+#### targetDir
+
+- Type: `string`
+- Details: specific upload path.
+
+### QiniuStore.prototype.read(file)
+
+Read file from Qiniu storage, Returns a Promise for file buffer Buffer.
+
+#### file
+
+##### path
+
+- Type: `string`
+- Details: the path of the file.
+
+### QiniuStore.prototype.exists(filename[, targetDir])
+
+Returns a Promise for file exists.
+
+#### filename
+
+- Type: `string`
+- Details: the name of the file.
+
+#### targetDir
+
+- Type: `string`
+- Details: specific file direcory path.
+
+### :construction: QiniuStore.prototype.delete(filename[, targetDir])
+
+#### filename
+
+- Type: `string`
+- Details: the name of the file.
+
+#### targetDir
+
+- Type: `string`
+- Details: specific file direcory path.
 
 ## Contributing
 

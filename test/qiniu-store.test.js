@@ -4,18 +4,19 @@ import QiniuStorage from '..'
 import url from 'url'
 import path from 'path'
 import moment from 'moment'
-import dotenv from 'dotenv'
 
-dotenv.config()
+if (!process.env.CI) {
+  require('dotenv').config()
+}
 
 const timestamp = Date.now()
 
 const expectedDir = `test/${timestamp}/${moment().format('YYYY/MM')}`
 
 const config = {
-  bucket: process.env.QINIU_BUCKET,
   accessKey: process.env.QINIU_AK,
   secretKey: process.env.QINIU_SK,
+  bucket: process.env.QINIU_BUCKET,
   domain: process.env.QINIU_DOMAIN,
   format: 'test/' + timestamp + '/${yyyy}/${mm}/${name}${ext}'
 }
