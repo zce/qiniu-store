@@ -1,0 +1,12 @@
+{
+  "storage": {
+    "active": "qiniu",
+    "qiniu": {
+      "accessKey": "Qito9h4OBUGJvE45VNfCGr2aoaKVG7E4HcdIAIJ1",
+      "secretKey": "BSZrVP6uOH85kqAjV_uffGnBsRHuhNYjsgIRYVsE",
+      "bucket": "zce-sandbox",
+      "domain": "https://zce-sandbox.uieee.com",
+      "format": "${yyyy}/${mm}/${dd}/${name}-${uuid}-${timestamp}-${random}${ext}"
+    }
+  }
+}
