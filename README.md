@@ -91,6 +91,10 @@ In your `config.[env].json` file, you'll need to add a new `storage` block to wh
 - `${name}`: original file name
 - `${ext}`: original file ext
 
+##### Default format
+
+`"${yyyy}/${mm}/${name}${ext}"`
+
 ##### Example format
 
 `"${yyyy}/${mm}/${dd}/${name}-${uuid}-${timestamp}-${random}${ext}"`
@@ -145,6 +149,12 @@ QiniuStore constructor
 
 - Type: `string`
 - Details: qiniu bucket domain.
+
+##### format
+
+- Type: `string`
+- Details: file path format.
+- Default: '${yyyy}/${mm}/${name}${ext}'
 
 ### QiniuStore.prototype.save(file[, targetDir])
 
