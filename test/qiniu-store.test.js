@@ -116,7 +116,8 @@ test('exists#case2', t => {
 
 test('delete', t => {
   const storage = new QiniuStorage(config)
-  t.throwsAsync(storage.delete('faker.txt'), 'Not implemented')
+  return storage.delete('faker.txt')
+    .catch(err => t.is(err.message, 'Not implemented'))
 })
 
 test('serve', t => {
