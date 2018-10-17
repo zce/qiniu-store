@@ -114,6 +114,17 @@ test('exists#case2', t => {
     .then(exists => t.true(exists))
 })
 
+test('delete', t => {
+  const storage = new QiniuStorage(config)
+  t.throwsAsync(storage.delete('faker.txt'), 'Not implemented')
+})
+
+test('serve', t => {
+  const storage = new QiniuStorage(config)
+  const middleware = storage.serve()
+  t.truthy(middleware)
+})
+
 test('getUniqueFileName#case1', t => {
   const storage = new QiniuStorage(config)
   return storage.getUniqueFileName({ name: 'test.txt' }, '')
