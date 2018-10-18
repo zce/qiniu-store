@@ -33,7 +33,7 @@ test.before(t => {
   return storage.save(file)
     .then(uri => {
       t.context.faker = uri
-      return delay(15000)
+      return delay(2 * 60 * 1000)
     })
 })
 
