@@ -93,21 +93,21 @@ test('save#case2', t => {
 test('read#case1', t => {
   const storage = new QiniuStorage(config)
   return storage.read({ path: t.context.faker })
-    .then(buffer => t.is(buffer, 'zce'))
+    .then(buffer => t.is(buffer.toString('utf8'), 'zce'))
 })
 
 test('read#case2', t => {
   const storage = new QiniuStorage(config)
   const pathname = url.parse(t.context.faker).pathname
   return storage.read({ path: pathname })
-    .then(buffer => t.is(buffer, 'zce'))
+    .then(buffer => t.is(buffer.toString('utf8'), 'zce'))
 })
 
 test('read#case3', t => {
   const storage = new QiniuStorage(config)
   const pathname = url.parse(t.context.faker).pathname
   return storage.read({ path: pathname.slice(1) })
-    .then(buffer => t.is(buffer, 'zce'))
+    .then(buffer => t.is(buffer.toString('utf8'), 'zce'))
 })
 
 test('exists#case1', t => {
