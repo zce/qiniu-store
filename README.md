@@ -74,7 +74,7 @@ In your `config.[env].json` file, you'll need to add a new `storage` block to wh
       "secretKey": "your secret key",
       "bucket": "your bucket name",
       "domain": "your bucket domain",
-      "format": "${yyyy}/${mm}/${name}${ext}"
+      "format": "${years}/${months}/${name}${ext}"
     }
   }
 }
@@ -82,22 +82,26 @@ In your `config.[env].json` file, you'll need to add a new `storage` block to wh
 
 #### Available format tags
 
-- `${yyyy}`: year
-- `${mm}`: month
-- `${dd}`: dates
-- `${uuid}`: uuid
-- `${timestamp}`: timestamp
+- `${years}`: 4 digit years
+- `${months}`: 2 digit months
+- `${date}`: 2 digit date
+- `${hours}`: 2 digit hours
+- `${minutes}`: 2 digit minutes
+- `${seconds}`: 2 digit seconds
+- `${milliseconds}`: 3 digit milliseconds
+- `${timestamp}`: Unix ms timestamp
 - `${random}`: 8 digit random
+- `${uuid}`: uuid
 - `${name}`: original file name
 - `${ext}`: original file ext
 
 ##### Default format
 
-`"${yyyy}/${mm}/${name}${ext}"`
+`"${years}/${months}/${name}${ext}"`
 
 ##### Example format
 
-`"${yyyy}/${mm}/${dd}/${name}-${uuid}-${timestamp}-${random}${ext}"`
+`"${years}/${months}/${date}/${name}-${uuid}-${timestamp}-${random}${ext}"`
 
 ### Programatically
 
@@ -108,7 +112,7 @@ const store = QiniuStore({
   secretKey: 'your secret key',
   bucket: 'your bucket name',
   domain: 'your bucket domain',
-  format: '${yyyy}/${mm}/${name}${ext}'
+  format: '${years}/${months}/${name}${ext}'
 })
 
 // save file
@@ -154,7 +158,7 @@ QiniuStore constructor
 
 - Type: `string`
 - Details: file path format.
-- Default: '${yyyy}/${mm}/${name}${ext}'
+- Default: '${years}/${months}/${name}${ext}'
 
 ### QiniuStore.prototype.save(file[, targetDir])
 

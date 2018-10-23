@@ -19,7 +19,7 @@ const config = {
   secretKey: process.env.QINIU_SK,
   bucket: process.env.QINIU_BUCKET,
   domain: process.env.QINIU_DOMAIN,
-  format: 'test/' + timestamp + '/${yyyy}/${mm}/${name}${ext}'
+  format: 'test/' + timestamp + '/${years}/${months}/${name}${ext}'
 }
 
 const delay = timeout => new Promise(resolve => setTimeout(resolve, timeout))
@@ -43,7 +43,7 @@ test('constructor#case1', t => {
   t.truthy(storage.uploader)
   t.truthy(storage.manager)
 
-  t.is(storage.dirFormat, 'test/' + timestamp + '/${yyyy}/${mm}')
+  t.is(storage.dirFormat, 'test/' + timestamp + '/${years}/${months}')
   t.is(storage.nameFormat, '${name}${ext}')
   t.is(storage.bucket, process.env.QINIU_BUCKET)
   t.is(storage.domain, process.env.QINIU_DOMAIN)

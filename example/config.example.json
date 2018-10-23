@@ -6,7 +6,7 @@
       "secretKey": "your secret key",
       "bucket": "your bucket name",
       "domain": "your bucket domain",
-      "format": "${yyyy}/${mm}/${name}${ext}"
+      "format": "${years}/${months}/${name}${ext}"
     }
   }
 }
