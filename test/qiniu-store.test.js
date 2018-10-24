@@ -33,37 +33,23 @@ test.before(t => {
   return storage.save(file)
     .then(uri => {
       t.context.faker = uri
-      return delay(2 * 60 * 1000)
+      return delay(1 * 60 * 1000)
     })
 })
 
 test('constructor#case1', t => {
   const storage = new QiniuStorage(config)
-  t.truthy(storage.token)
-  t.truthy(storage.uploader)
-  t.truthy(storage.manager)
-
-  t.is(storage.dirFormat, 'test/' + timestamp + '/${years}/${months}')
-  t.is(storage.nameFormat, '${name}${ext}')
+  t.is(storage.accessKey, process.env.QINIU_AK)
+  t.is(storage.secretKey, process.env.QINIU_SK)
   t.is(storage.bucket, process.env.QINIU_BUCKET)
   t.is(storage.domain, process.env.QINIU_DOMAIN)
+  t.is(storage.dirFormat, 'test/' + timestamp + '/${years}/${months}')
+  t.is(storage.nameFormat, '${name}${ext}')
 })
 
 test('constructor#case2', t => {
   const err = t.throws(() => new QiniuStorage({}))
   t.is(err.message, 'Missing necessary configuration options')
-})
-
-test('getDirectory', t => {
-  const storage = new QiniuStorage(config)
-  const dir = storage.getDirectory()
-  t.is(dir, expectedDir)
-})
-
-test('getFilename', t => {
-  const storage = new QiniuStorage(config)
-  const filename = storage.getFilename('test.txt')
-  t.is(filename, 'test.txt')
 })
 
 test('save#case1', t => {
