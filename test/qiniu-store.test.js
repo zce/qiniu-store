@@ -52,6 +52,12 @@ test('constructor#case2', t => {
   t.is(err.message, 'Missing necessary configuration options')
 })
 
+test('constructor#case3', t => {
+  const config2 = Object.assign({}, config, { format: '${zce}' })
+  const err = t.throws(() => new QiniuStorage(config2))
+  t.is(err.message, 'Invalid format: ${zce} is unknown tag')
+})
+
 test('save#case1', t => {
   const storage = new QiniuStorage(config)
   const file = {
