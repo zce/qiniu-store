@@ -2,11 +2,11 @@
   "storage": {
     "active": "qiniu",
     "qiniu": {
-      "accessKey": "your access key",
-      "secretKey": "your secret key",
-      "bucket": "your bucket name",
-      "domain": "your bucket domain",
-      "format": "${years}/${months}/${name}${ext}"
+      "accessKey": "<your access key>",
+      "secretKey": "<your secret key>",
+      "bucket": "<your bucket name>",
+      "domain": "<your bucket domain>",
+      "format": "${year}/${month}/${name}${ext}"
     }
   }
 }

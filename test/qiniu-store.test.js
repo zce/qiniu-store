@@ -19,7 +19,7 @@ const config = {
   secretKey: process.env.QINIU_SK,
   bucket: process.env.QINIU_BUCKET,
   domain: process.env.QINIU_DOMAIN,
-  format: 'test/' + timestamp + '/${years}/${months}/${name}${ext}'
+  format: 'test/' + timestamp + '/${year}/${month}/${name}${ext}'
 }
 
 const delay = timeout => new Promise(resolve => setTimeout(resolve, timeout))
@@ -43,7 +43,7 @@ test('constructor#case1', t => {
   t.is(storage.secretKey, process.env.QINIU_SK)
   t.is(storage.bucket, process.env.QINIU_BUCKET)
   t.is(storage.domain, process.env.QINIU_DOMAIN)
-  t.is(storage.dirFormat, 'test/' + timestamp + '/${years}/${months}')
+  t.is(storage.dirFormat, 'test/' + timestamp + '/${year}/${month}')
   t.is(storage.nameFormat, '${name}${ext}')
 })
 
@@ -55,7 +55,7 @@ test('constructor#case2', t => {
 test('constructor#case3', t => {
   const config2 = Object.assign({}, config, { format: '${zce}' })
   const err = t.throws(() => new QiniuStorage(config2))
-  t.is(err.message, 'Invalid format: ${zce} is unknown tag')
+  t.is(err.message, 'Invalid format: ${zce} is unknown variable')
 })
 
 test('save#case1', t => {

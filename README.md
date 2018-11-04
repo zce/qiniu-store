@@ -70,25 +70,22 @@ In your `config.[env].json` file, you'll need to add a new `storage` block to wh
   "storage": {
     "active": "qiniu",
     "qiniu": {
-      "accessKey": "your access key",
-      "secretKey": "your secret key",
-      "bucket": "your bucket name",
-      "domain": "your bucket domain",
-      "format": "${years}/${months}/${name}${ext}"
+      "accessKey": "<your access key>",
+      "secretKey": "<your secret key>",
+      "bucket": "<your bucket name>",
+      "domain": "<your bucket domain>",
+      "format": "${year}/${month}/${name}${ext}"
     }
   }
 }
 ```
 
-#### Available format tags
+#### Available format variables
 
-- `${years}`: 4 digit years
-- `${months}`: 2 digit months
-- `${date}`: 2 digit date
-- `${hours}`: 2 digit hours
-- `${minutes}`: 2 digit minutes
-- `${seconds}`: 2 digit seconds
-- `${milliseconds}`: 3 digit milliseconds
+- `${year}`: 4 digit years
+- `${month}`: 2 digit months
+- `${day}`: 2 digit date
+- `${hour}`: 2 digit hours
 - `${timestamp}`: Unix ms timestamp
 - `${random}`: 8 digit random
 - `${uuid}`: uuid
@@ -97,22 +94,22 @@ In your `config.[env].json` file, you'll need to add a new `storage` block to wh
 
 ##### Default format
 
-`"${years}/${months}/${name}${ext}"`
+`"${year}/${month}/${name}${ext}"`
 
-##### Example format
+##### Full example format
 
-`"${years}/${months}/${date}/${name}-${uuid}-${timestamp}-${random}${ext}"`
+`"${year}/${month}/${day}/${hour}/${name}-${uuid}-${timestamp}-${random}${ext}"`
 
 ### Programatically
 
 ```javascript
 const QiniuStore = require('qiniu-store')
 const store = QiniuStore({
-  accessKey: 'your access key',
-  secretKey: 'your secret key',
-  bucket: 'your bucket name',
-  domain: 'your bucket domain',
-  format: '${years}/${months}/${name}${ext}'
+  accessKey: '<your access key>',
+  secretKey: '<your secret key>',
+  bucket: '<your bucket name>',
+  domain: '<your bucket domain>',
+  format: '${year}/${month}/${name}${ext}'
 })
 
 // save file
@@ -158,7 +155,7 @@ QiniuStore constructor
 
 - Type: `string`
 - Details: file path format.
-- Default: '${years}/${months}/${name}${ext}'
+- Default: '${year}/${month}/${name}${ext}'
 
 ### QiniuStore.prototype.save(file[, targetDir])
 
