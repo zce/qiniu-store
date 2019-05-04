@@ -547,10 +547,10 @@ atob@^2.1.1:
   resolved "http://registry.npm.taobao.org/atob/download/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha1-bZUX654DDSQ2ZmZR6GvZ9vE1M8k=
 
-ava@^1.0.0-rc.1:
+ava@1.0.0-rc.1:
   version "1.0.0-rc.1"
-  resolved "http://registry.npm.taobao.org/ava/download/ava-1.0.0-rc.1.tgz#4c1b585defcf18b90ba0c3f3716c4899ebf1c049"
-  integrity sha1-TBtYXe/PGLkLoMPzcWxImevxwEk=
+  resolved "https://registry.yarnpkg.com/ava/-/ava-1.0.0-rc.1.tgz#4c1b585defcf18b90ba0c3f3716c4899ebf1c049"
+  integrity sha512-tyHTMP7frwiewEvRUON4ikDneTg56981bnXzJe882sgL0BVxvUPH8jdiKKOtzZPZncGaTA/YXyDzYhjV71YRCg==
   dependencies:
     "@ava/babel-preset-stage-4" "^2.0.0"
     "@ava/babel-preset-transform-test-files" "^4.0.0"
@@ -1353,10 +1353,10 @@ dot-prop@^4.1.0, dot-prop@^4.2.0:
   dependencies:
     is-obj "^1.0.0"
 
-dotenv@^6.1.0:
+dotenv@6.1.0:
   version "6.1.0"
-  resolved "http://registry.npm.taobao.org/dotenv/download/dotenv-6.1.0.tgz#9853b6ca98292acb7dec67a95018fa40bccff42c"
-  integrity sha1-mFO2ypgpKst97GepUBj6QLzP9Cw=
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.1.0.tgz#9853b6ca98292acb7dec67a95018fa40bccff42c"
+  integrity sha512-/veDn2ztgRlB7gKmE3i9f6CmDIyXAy6d5nBq+whO9SLX+Zs1sXEgFLPi+aSuWqUuusMfbi84fT8j34fs1HaYUw==
 
 duplexer3@^0.1.4:
   version "0.1.4"
@@ -3100,10 +3100,10 @@ number-is-nan@^1.0.0:
   resolved "http://registry.npm.taobao.org/number-is-nan/download/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nyc@^13.1.0:
+nyc@13.1.0:
   version "13.1.0"
-  resolved "http://registry.npm.taobao.org/nyc/download/nyc-13.1.0.tgz#463665c7ff6b5798e322624a5eb449a678db90e3"
-  integrity sha1-RjZlx/9rV5jjImJKXrRJpnjbkOM=
+  resolved "https://registry.yarnpkg.com/nyc/-/nyc-13.1.0.tgz#463665c7ff6b5798e322624a5eb449a678db90e3"
+  integrity sha512-3GyY6TpQ58z9Frpv4GMExE1SV2tAgYqC7HSy2omEhNiCT3mhT9NyiOvIE8zkbuJVFzmvvNTnE4h/7/wQae7xLg==
   dependencies:
     archy "^1.0.0"
     arrify "^1.0.1"
@@ -4070,10 +4070,10 @@ standard-engine@~9.0.0:
     minimist "^1.1.0"
     pkg-conf "^2.0.0"
 
-standard@^12.0.1:
+standard@12.0.1:
   version "12.0.1"
-  resolved "http://registry.npm.taobao.org/standard/download/standard-12.0.1.tgz#0fc5a8aa6c34c546c5562aae644242b24dae2e61"
-  integrity sha1-D8Woqmw0xUbFViquZEJCsk2uLmE=
+  resolved "https://registry.yarnpkg.com/standard/-/standard-12.0.1.tgz#0fc5a8aa6c34c546c5562aae644242b24dae2e61"
+  integrity sha512-UqdHjh87OG2gUrNCSM4QRLF5n9h3TFPwrCNyVlkqu31Hej0L/rc8hzKqVvkb2W3x0WMq7PzZdkLfEcBhVOR6lg==
   dependencies:
     eslint "~5.4.0"
     eslint-config-standard "12.0.0"
