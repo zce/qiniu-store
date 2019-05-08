@@ -1,22 +1,21 @@
 sudo: false
 
-# os:
-#   - osx
-#   - linux
-#   - windows
+os:
+  - linux
+  - windows
 
 language: node_js
 
 node_js:
   - lts/*
-  - stable
+  - node
 
 notifications:
   email:
     on_success: never
     on_failure: change
 
-before_script:
+before_install:
   - yarn global add nyc codecov
 
 script:

@@ -2,8 +2,7 @@
 import test from 'ava'
 import QiniuStorage from '..'
 
-import url from 'url'
-import path from 'path'
+import qiniu from 'qiniu'
 import moment from 'moment'
 
 if (!process.env.CI) {
@@ -22,22 +21,9 @@ const config = {
   format: 'test/' + timestamp + '/${year}/${month}/${name}${ext}'
 }
 
-const delay = timeout => new Promise(resolve => setTimeout(resolve, timeout))
+const temps = []
 
-test.before(t => {
-  const storage = new QiniuStorage(config)
-  const file = {
-    name: 'faker.txt',
-    path: path.join(__dirname, 'z.txt')
-  }
-  return storage.save(file)
-    .then(uri => {
-      t.context.faker = uri
-      return delay(1 * 60 * 1000)
-    })
-})
-
-test('constructor#case1', t => {
+test('constructor#case1', async t => {
   const storage = new QiniuStorage(config)
   t.is(storage.accessKey, process.env.QINIU_AK)
   t.is(storage.secretKey, process.env.QINIU_SK)
@@ -47,93 +33,103 @@ test('constructor#case1', t => {
   t.is(storage.nameFormat, '${name}${ext}')
 })
 
-test('constructor#case2', t => {
+test('constructor#case2', async t => {
   const err = t.throws(() => new QiniuStorage({}))
   t.is(err.message, 'Missing necessary configuration options')
 })
 
-test('constructor#case3', t => {
+test('constructor#case3', async t => {
   const config2 = Object.assign({}, config, { format: '${zce}' })
   const err = t.throws(() => new QiniuStorage(config2))
   t.is(err.message, 'Invalid format: ${zce} is unknown variable')
 })
 
-test('save#case1', t => {
+test('save#case1', async t => {
   const storage = new QiniuStorage(config)
   const file = {
     name: 'test.txt',
     path: __filename
   }
-  return storage.save(file)
-    .then(uri => {
-      t.is(uri, `${process.env.QINIU_DOMAIN}/${expectedDir}/test.txt`)
-    })
+  const uri = await storage.save(file)
+  t.is(uri, `${process.env.QINIU_DOMAIN}/${expectedDir}/test.txt`)
+  temps.push(`/${expectedDir}/test.txt`)
 })
 
-test('save#case2', t => {
+test('save#case2', async t => {
   const storage = new QiniuStorage(config)
   const file = {
     name: 'test.txt',
     path: __filename
   }
-  return storage.save(file, `test/${timestamp}`)
-    .then(uri => {
-      t.is(uri, `${process.env.QINIU_DOMAIN}/test/${timestamp}/test.txt`)
-    })
+  const uri = await storage.save(file, `test/${timestamp}`)
+  t.is(uri, `${process.env.QINIU_DOMAIN}/test/${timestamp}/test.txt`)
+  temps.push(`/test/${timestamp}/test.txt`)
 })
 
-test('read#case1', t => {
+test('read#case1', async t => {
   const storage = new QiniuStorage(config)
-  return storage.read({ path: t.context.faker })
-    .then(buffer => t.is(buffer.toString('utf8'), 'zce'))
+  const buffer = await storage.read({ path: `${process.env.QINIU_DOMAIN}/test/qiniu-store.txt` })
+  t.is(buffer.toString('utf8').trim(), 'zce')
 })
 
-test('read#case2', t => {
+test('read#case2', async t => {
   const storage = new QiniuStorage(config)
-  const pathname = url.parse(t.context.faker).pathname
-  return storage.read({ path: pathname })
-    .then(buffer => t.is(buffer.toString('utf8'), 'zce'))
+  const buffer = await storage.read({ path: 'test/qiniu-store.txt' })
+  t.is(buffer.toString('utf8').trim(), 'zce')
 })
 
-test('read#case3', t => {
+test('read#case3', async t => {
   const storage = new QiniuStorage(config)
-  const pathname = url.parse(t.context.faker).pathname
-  return storage.read({ path: pathname.slice(1) })
-    .then(buffer => t.is(buffer.toString('utf8'), 'zce'))
+  const buffer = await storage.read({ path: 'test/qiniu-store.txt' })
+  t.is(buffer.toString('utf8'), 'zce')
 })
 
-test('exists#case1', t => {
+test('read#case4', async t => {
   const storage = new QiniuStorage(config)
-  return storage.exists('faker.txt')
-    .then(exists => t.false(exists))
+  await t.throwsAsync(() => storage.read({ path: '' }), 'Could not read file: ')
 })
 
-test('exists#case2', t => {
+test('exists#case1', async t => {
   const storage = new QiniuStorage(config)
-  return storage.exists('faker.txt', expectedDir)
-    .then(exists => t.true(exists))
+  const exists = await storage.exists(`faker-${Math.random()}.txt`)
+  t.false(exists)
 })
 
-test('delete', t => {
+test('exists#case2', async t => {
   const storage = new QiniuStorage(config)
-  return storage.delete('faker.txt')
-    .catch(err => t.is(err.message, 'Not implemented'))
+  const exists = await storage.exists('qiniu-store.txt', '/test')
+  t.true(exists)
 })
 
-test('serve', t => {
+test('delete', async t => {
   const storage = new QiniuStorage(config)
-  const middleware = storage.serve()
-  t.truthy(middleware)
+  await t.throwsAsync(() => storage.delete('faker.txt'), 'Not implemented')
 })
 
-test('getUniqueFileName#case1', t => {
+test('serve', async t => {
   const storage = new QiniuStorage(config)
-  return storage.getUniqueFileName({ name: 'test.txt' }, '')
-    .then(name => t.is(name, 'test-1.txt'))
+  t.is(typeof storage.serve(), 'function')
 })
 
-test('getUniqueFileName#case2', t => {
+test('getUniqueFileName#case1', async t => {
   const storage = new QiniuStorage(config)
-  return storage.getUniqueFileName({ name: 'cover.jpg' }, '2018/10')
-    .then(name => t.is(name, '2018/10/cover-1.jpg'))
+  const temp = `faker-${Math.random()}.txt`
+  const name = await storage.getUniqueFileName({ name: temp }, '')
+  t.is(name, temp)
+})
+
+test('getUniqueFileName#case2', async t => {
+  const storage = new QiniuStorage(config)
+  const name = await storage.getUniqueFileName({ name: 'qiniu-store.txt' }, 'test')
+  t.is(name.replace(/\\/g, '/'), 'test/qiniu-store-1.txt')
+})
+
+test.after(async t => {
+  const mac = new qiniu.auth.digest.Mac(process.env.QINIU_AK, process.env.QINIU_SK)
+  const config = new qiniu.conf.Config()
+  // config.useHttpsDomain = true;
+  // config.zone = qiniu.zone.Zone_z0
+  const bucketManager = new qiniu.rs.BucketManager(mac, config)
+  const deleteOperations = temps.map(i => qiniu.rs.deleteOp(process.env.QINIU_BUCKET, i))
+  bucketManager.batch(deleteOperations, () => t.end())
 })

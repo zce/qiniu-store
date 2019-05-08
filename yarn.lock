@@ -402,17 +402,15 @@
   dependencies:
     arrify "^1.0.1"
 
-"@sindresorhus/is@^0.12.0":
-  version "0.12.0"
-  resolved "http://registry.npm.taobao.org/@sindresorhus/is/download/@sindresorhus/is-0.12.0.tgz#55c37409c809e802efea25911a579731adfc6e07"
-  integrity sha1-VcN0CcgJ6ALv6iWRGleXMa38bgc=
-  dependencies:
-    symbol-observable "^1.2.0"
+"@sindresorhus/is@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
+  integrity sha512-9NET910DNaIPngYnLLPeg+Ogzqsi9uM4mSboU5y6p8S5DzMTVEsJZrawi+BoDNUVBa2DhJqQYUFvMDfgU062LQ==
 
-"@szmarczak/http-timer@^1.1.0":
-  version "1.1.1"
-  resolved "http://registry.npm.taobao.org/@szmarczak/http-timer/download/@szmarczak/http-timer-1.1.1.tgz#6402258dfe467532b26649ef076b4d11f74fb612"
-  integrity sha1-ZAIljf5GdTKyZknvB2tNEfdPthI=
+"@szmarczak/http-timer@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@szmarczak/http-timer/-/http-timer-1.1.2.tgz#b1665e2c461a2cd92f4c1bbf50d5454de0d4b421"
+  integrity sha512-XIB2XbzHTN6ieIjfIMV9hlVcfPU26s2vafYWQcZHWXHOxiaRZYEDKEwdl129Zyg50+foYV2jCgtrqSA6qNuNSA==
   dependencies:
     defer-to-connect "^1.0.1"
 
@@ -845,10 +843,10 @@ cache-base@^1.0.1:
     union-value "^1.0.0"
     unset-value "^1.0.0"
 
-cacheable-request@^5.1.0:
-  version "5.1.0"
-  resolved "http://registry.npm.taobao.org/cacheable-request/download/cacheable-request-5.1.0.tgz#ce0958e977bdb4a5b718464049793b8d4bf7d75d"
-  integrity sha1-zglY6Xe9tKW3GEZASXk7jUv3110=
+cacheable-request@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/cacheable-request/-/cacheable-request-6.0.0.tgz#4a1727414e02ac4af82560c4da1b61daa3fa2b63"
+  integrity sha512-2N7AmszH/WPPpl5Z3XMw1HAP+8d+xugnKQAeKvxFZ/04dbT/CAznqwbl+7eSr3HkwdepNwtb2yx3CAMQWvG01Q==
   dependencies:
     clone-response "^1.0.2"
     get-stream "^4.0.0"
@@ -2145,14 +2143,14 @@ got@^6.7.1:
     unzip-response "^2.0.1"
     url-parse-lax "^1.0.0"
 
-got@^9.3.1:
-  version "9.3.1"
-  resolved "http://registry.npm.taobao.org/got/download/got-9.3.1.tgz#f0e6d531e6ece50375de4f18a640b716862f102c"
-  integrity sha1-8ObVMebs5QN13k8YpkC3FoYvECw=
+got@^9.6.0:
+  version "9.6.0"
+  resolved "https://registry.yarnpkg.com/got/-/got-9.6.0.tgz#edf45e7d67f99545705de1f7bbeeeb121765ed85"
+  integrity sha512-R7eWptXuGYxwijs0eV+v3o6+XH1IqVK8dJOEecQfTmkncw9AV4dcw/Dhxi8MdlqPthxxpZyizMzyg8RTmEsG+Q==
   dependencies:
-    "@sindresorhus/is" "^0.12.0"
-    "@szmarczak/http-timer" "^1.1.0"
-    cacheable-request "^5.1.0"
+    "@sindresorhus/is" "^0.14.0"
+    "@szmarczak/http-timer" "^1.1.2"
+    cacheable-request "^6.0.0"
     decompress-response "^3.3.0"
     duplexer3 "^0.1.4"
     get-stream "^4.1.0"
@@ -3188,6 +3186,11 @@ moment@^2.19.3:
   resolved "http://registry.npm.taobao.org/moment/download/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
   integrity sha1-PCV/mDn8DpP/UxSWMiOeuQeD/2Y=
 
+moment@^2.24.0:
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
+
 ms@2.0.0:
   version "2.0.0"
   resolved "http://registry.npm.taobao.org/ms/download/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -3819,7 +3822,7 @@ punycode@^2.1.0:
 
 qiniu@^7.2.1:
   version "7.2.1"
-  resolved "http://registry.npm.taobao.org/qiniu/download/qiniu-7.2.1.tgz#5080ebc4ce84cd1caffb645d91aabdcf9a2f39c6"
+  resolved "https://registry.yarnpkg.com/qiniu/-/qiniu-7.2.1.tgz#5080ebc4ce84cd1caffb645d91aabdcf9a2f39c6"
   integrity sha1-UIDrxM6EzRyv+2Rdkaq9z5ovOcY=
   dependencies:
     agentkeepalive "3.3.0"
@@ -4509,7 +4512,7 @@ symbol-observable@^0.2.2:
   resolved "http://registry.npm.taobao.org/symbol-observable/download/symbol-observable-0.2.4.tgz#95a83db26186d6af7e7a18dbd9760a2f86d08f40"
   integrity sha1-lag9smGG1q9+ehjb2XYKL4bQj0A=
 
-symbol-observable@^1.0.4, symbol-observable@^1.1.0, symbol-observable@^1.2.0:
+symbol-observable@^1.0.4, symbol-observable@^1.1.0:
   version "1.2.0"
   resolved "http://registry.npm.taobao.org/symbol-observable/download/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
   integrity sha1-wiaIrtTqs83C3+rLtWFmBWCgCAQ=
