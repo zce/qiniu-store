@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "ghost-storage-base": "^0.0.3",
-    "got": "^9.6.0",
+    "got": "^10.0.0",
     "moment": "^2.24.0",
     "qiniu": "^7.2.1",
     "uuid": "^3.3.2"
