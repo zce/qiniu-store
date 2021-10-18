@@ -30,7 +30,7 @@
     "test": "nyc ava"
   },
   "dependencies": {
-    "ghost-storage-base": "^0.0.3",
+    "ghost-storage-base": "^0.0.6",
     "got": "^10.0.0",
     "moment": "^2.24.0",
     "qiniu": "^7.2.1",
