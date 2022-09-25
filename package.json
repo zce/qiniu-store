@@ -37,7 +37,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "ava": "2.4.0",
+    "ava": "4.3.3",
     "dotenv": "8.2.0",
     "nyc": "14.1.1",
     "standard": "14.3.1"
